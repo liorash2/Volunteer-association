@@ -1,0 +1,5 @@
+<div class="jumbotron">
+  <h1>Welcome to Volunteer Application!</h1>
+  <p *ngIf="!user">Hello guest, please login <a [routerLink]="['login']">here</a></p>
+  <p *ngIf="!!user">Hello {{ user.first_name }}, good to see you! </p>
+</div>

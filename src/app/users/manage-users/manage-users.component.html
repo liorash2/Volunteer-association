@@ -1,0 +1,107 @@
+<h4>Manage Users</h4>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Organization</th>
+      <th></th>
+    </tr>
+    <tr app-user *ngFor="let user of users" [user]="user" [organizations]="organizations"
+      (EditUserClicked)="onEditUserEvent($event)"></tr>
+  </tbody>
+</table>
+<div>
+  <button (click)="onToggleUser(true)" *ngIf="!newUserMode && !editUserMode" type="button" class="btn btn-primary"><span
+      class="glyphicon glyphicon-plus-sign"></span>
+    Add User</button>
+  <button (click)="onToggleUser(false)" *ngIf="newUserMode && !editUserMode" type="button"
+    class="btn btn-secondary">Close</button>
+
+  <h4 *ngIf="editUserMode">{{ userFromLabels.editTitle }}<button [ngStyle]="{ marginLeft: '20px' }" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+  </h4>
+  <form [formGroup]="newUserForm" (ngSubmit)="OnAddUserSubmit()" *ngIf="newUserMode || editUserMode">
+    <div class="form-group"
+      [ngClass]="{ 'has-error': newUserForm.get('email').touched && newUserForm.get('email').errors != null }">
+      <label for="new-email">User Email</label>
+      <input type="text" id="new-email" class="form-control" formControlName="email" />
+      <span class="help-block" *ngIf="newUserForm.get('email').touched && newUserForm.get('email').errors">Invalid
+        Email</span>
+    </div>
+    <div class="form-group"
+      [ngClass]="{ 'has-error': newUserForm.get('firstName').touched && newUserForm.get('firstName').errors != null }">
+      <label for="new-firstname">User First Name</label>
+      <input type="text" id="new-firstname" class="form-control" formControlName="firstName" />
+      <span class="help-block"
+        *ngIf="newUserForm.get('firstName').touched && newUserForm.get('firstName').errors">Invalid First Name</span>
+    </div>
+    <div class="form-group"
+      [ngClass]="{ 'has-error': newUserForm.get('lastName').touched && newUserForm.get('lastName').errors != null }">
+      <label for="new-lastname">User Last Name</label>
+      <input type="text" id="new-lastname" class="form-control" formControlName="lastName" />
+      <span class="help-block" *ngIf="newUserForm.get('lastName').touched && newUserForm.get('lastName').errors">Invalid
+        Last Name </span>
+    </div>
+    <div class="form-group" *ngIf="!editUserMode"
+      [ngClass]="{ 'has-error': newUserForm.get('password').touched && newUserForm.get('password').errors != null }">
+      <label for="new-password">User Password</label>
+      <input type="password" id="new-password" class="form-control" formControlName="password" />
+      <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+      <label for="new-email">User Role</label>
+      <select class="form-control" formControlName="role">
+        <option *ngFor="let role of roles" [value]="role.key">{{ role.name }}</option>
+      </select>
+      <span class="help-block"></span>
+    </div>
+    <div *ngIf="newUserForm.value.role === 'organization'" class="form-group organization-group"
+      [ngClass]="{ 'has-error': newUserForm.get('organization').touched && newUserForm.get('organization').errors != null }">
+      <label for="new-organization">Select Organization</label>
+      <select class="form-control" formControlName="organization"
+        [value]="organizations && organizations.length ? organizations[0]._id : ''">
+        <option *ngFor="let organ of organizations;" [value]="organ._id">{{ organ.name }}</option>
+      </select>
+      <button class="btn btn-secondary" (click)="openModal(template)"><span class="glyphicon glyphicon-plus"></span> Add
+        New Organization</button>
+      <span class="help-block"></span>
+    </div>
+    <button type="button" class="btn btn-success" (click)="OnAddUserSubmit()">Submit User</button>
+  </form>
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Add New Organization</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="newOrganization" (ngSubmit)="onCreateOrganization()">
+        <div class="form-group"
+          [ngClass]="{ 'has-error': newOrganization.get('name').touched && newOrganization.get('name').errors != null }">
+          <label for="new-organ-name">Organization Name</label>
+          <input type="text" id="new-organ-name" class="form-control" formControlName="name" />
+          <span class="help-block"
+            *ngIf="newOrganization.get('name').touched && newOrganization.get('name').errors">Invalid Name </span>
+        </div>
+        <div class="form-group"
+          [ngClass]="{ 'has-error': newOrganization.get('desc').touched && newOrganization.get('desc').errors != null }">
+          <label for="new-organ-desc">Organization Description</label>
+          <input type="text" id="new-organ-desc" class="form-control" formControlName="desc" />
+          <span class="help-block"
+            *ngIf="newOrganization.get('desc').touched && newOrganization.get('desc').errors">Invalid Description
+          </span>
+        </div>
+        <button class="btn btn-primary" [disabled]="!newOrganization.valid">Add New Organization</button>
+      </form>
+    </div>
+  </ng-template>
+  <div class="alert alert-danger" *ngIf="userFromLabels.opErr">
+    <p>{{ userFromLabels.opErr }}</p>
+  </div>
+  <div class="alert alert-success" *ngIf="userFromLabels.opSuccess">
+    <p>{{ userFromLabels.opSuccess }}</p>
+  </div>
+</div>

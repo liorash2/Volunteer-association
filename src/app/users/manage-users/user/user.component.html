@@ -1,0 +1,8 @@
+<ng-template [ngIf]="!edit">
+  <td>{{ user.email }}</td>
+  <td>{{ user.first_name }}</td>
+  <td>{{ user.last_name }}</td>
+  <td>{{ getRoleName(user.role) }}</td>
+  <td>{{ getOrganization(user.organizationID) }}</td>
+  <td><a (click)="editUser()">Edit <span class="glyphicon glyphicon-pencil"></span></a></td>
+</ng-template>

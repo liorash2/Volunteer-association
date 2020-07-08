@@ -1,0 +1,7 @@
+.buttons-row {
+  display: inline-flex;
+}
+.buttons-row .btn {
+  margin-right: 10px;
+  padding: 2px 15px;
+}
