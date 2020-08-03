@@ -32,4 +32,7 @@ export class ApiService {
   createOrganization(organization: Organization): Observable<{ organization: Organization }> {
     return this.http.post<{ organization: Organization }>(this.API_URL + 'organization', organization);
   }
+  updateOrganization(organization: Organization): Observable<void> {
+    return this.http.put<void>(this.API_URL + 'organization/' + organization._id, organization);
+  }
 }

@@ -13,6 +13,7 @@ import { ManageOrganizationComponent } from './users/manage-organization/manage-
 import { UserComponent } from './users/manage-users/user/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { EditComponent } from './users/manage-organization/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HomeComponent,
     ManageUsersComponent,
     ManageOrganizationComponent,
-    UserComponent
+    UserComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
