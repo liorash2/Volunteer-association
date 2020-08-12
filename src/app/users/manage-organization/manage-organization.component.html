@@ -1,1 +1,46 @@
-<p>manage-organization works!</p>
+<h4>Manage Organizations</h4>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <th>Name </th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+    <tr app-organization-edit *ngFor="let organization of organizations" [organization]="organization" (editOrganization)="EditOrganization($event)"></tr>
+  </tbody>
+</table>
+<button (click)="onToggleOrganization(true)" *ngIf="!isNewOrganization && !isEditOrganization" type="button" class="btn btn-primary"><span
+    class="glyphicon glyphicon-plus-sign"></span>
+  Add New Orghanization</button>
+<button (click)="onToggleOrganization(false)" *ngIf="isNewOrganization && !isEditOrganization" type="button"
+  class="btn btn-secondary">Close</button>
+
+<h4 *ngIf="isEditOrganization">{{ labels.editTitle }}<button [ngStyle]="{ marginLeft: '20px' }"
+    class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+</h4>
+<form [formGroup]="organizationForm" (ngSubmit)="OnOrganizationSubmit()" *ngIf="isNewOrganization || isEditOrganization">
+  <div class="form-group"
+    [ngClass]="{ 'has-error': organizationForm.get('name').touched && organizationForm.get('name').errors != null }">
+    <label for="new-email">Organization Name</label>
+    <input type="text" id="new-org-name" class="form-control" formControlName="name" />
+    <span class="help-block" *ngIf="organizationForm.get('name').touched && organizationForm.get('name').errors">Invalid
+      Name</span>
+  </div>
+  <div class="form-group"
+    [ngClass]="{ 'has-error': organizationForm.get('desc').touched && organizationForm.get('desc').errors != null }">
+    <label for="new-org-desc">Organization Description</label>
+    <input type="text" id="new-org-desc" class="form-control" formControlName="desc" />
+    <span class="help-block" *ngIf="organizationForm.get('desc').touched && organizationForm.get('desc').errors">Invalid
+      First Description</span>
+  </div>
+  <button type="button" [disabled]="organizationForm.invalid" class="btn btn-success" (click)="OnOrganizationSubmit()">Submit Organization</button>
+</form>
+
+<div class="alert alert-danger" *ngIf="labels.submitOrganizationError">
+  <p>{{ labels.submitOrganizationError }}</p>
+</div>
+<div class="alert alert-success" *ngIf="labels.submitOrganizationESuccess">
+  <p>{{ labels.submitOrganizationESuccess }}</p>
+</div>
+

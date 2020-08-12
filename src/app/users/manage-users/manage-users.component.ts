@@ -57,7 +57,7 @@ export class ManageUsersComponent implements OnInit {
       this.users = users;
     });
 
-    this.organizationService.getOrganizations().subscribe(o => {
+    this.organizationService.organizations.subscribe(o => {
       this.organizations = o;
       if (this.organizations.length) {
         this.newUserForm.get('organization').setValue(this.organizations[0]._id);
