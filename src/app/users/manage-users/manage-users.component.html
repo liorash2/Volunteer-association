@@ -64,8 +64,6 @@
         [value]="organizations && organizations.length ? organizations[0]._id : ''">
         <option *ngFor="let organ of organizations;" [value]="organ._id">{{ organ.name }}</option>
       </select>
-      <button class="btn btn-secondary" (click)="openModal(template)"><span class="glyphicon glyphicon-plus"></span> Add
-        New Organization</button>
       <span class="help-block"></span>
     </div>
     <button type="button" class="btn btn-success" (click)="OnAddUserSubmit()">Submit User</button>

@@ -1,0 +1,45 @@
+<h1>Register User</h1>
+<form [formGroup]="newUserForm" (ngSubmit)="onFormSubmit()">
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('email').touched && newUserForm.get('email').errors != null }">
+    <label for="n-user-email">Email:</label>
+    <input id="n-user-email" type="email" class="form-control" formControlName="email">
+    <span class="help-block" *ngIf="newUserForm.get('email').touched && newUserForm.get('email').errors != null">Invalid Email Address</span>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('firstName').touched && newUserForm.get('firstName').errors != null }">
+    <label for="n-user-f-name">First Name:</label>
+    <input id="n-user-f-name" type="text" class="form-control" formControlName="firstName">
+    <span class="help-block" *ngIf="newUserForm.get('firstName').touched && newUserForm.get('firstName').errors != null">Required Field</span>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('lastName').touched && newUserForm.get('lastName').errors != null }">
+    <label for="n-user-l-name">Last Name:</label>
+    <input id="n-user-l-name" type="text" class="form-control" formControlName="lastName">
+    <span class="help-block" *ngIf="newUserForm.get('lastName').touched && newUserForm.get('lastName').errors != null">Required Field</span>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('iam').touched && newUserForm.get('iam').errors != null }">
+    <label>I am</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="iam" id="organization-owner" value="o" checked formControlName="iam">
+        Organization Owner
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="iam" id="volunteer" value="v" formControlName="iam">
+        Volunteer
+      </label>
+    </div>
+    <span class="help-block" *ngIf="newUserForm.get('iam').touched && newUserForm.get('iam').errors != null">Required Field</span>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('password').touched && newUserForm.get('password').errors != null }">
+    <label for="n-user-pass">Password:</label>
+    <input type="password" id="n-user-pass" class="form-control" formControlName="password">
+    <span class="help-block" *ngIf="newUserForm.get('password').touched && newUserForm.get('password').errors != null">Invalid Password</span>
+  </div>
+  <div class="form-group" [ngClass]="{ 'has-error': newUserForm.get('confirmPass').touched && newUserForm.get('confirmPass').errors != null }">
+    <label for="n-user-c-pass">Confirm Password:</label>
+    <input type="password" id="n-user-c-pass" class="form-control" formControlName="confirmPass">
+    <span class="help-block" *ngIf="newUserForm.get('confirmPass').touched && newUserForm.get('confirmPass').errors != null">Passwords Must Match</span>
+  </div>
+  <button class="btn btn-primary" type="submit">Register</button>
+</form>

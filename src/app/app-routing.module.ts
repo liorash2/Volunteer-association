@@ -4,11 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { CanActivateService, CanActivateLogin } from './services/can-activate.service';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [CanActivateLogin] },
   { path: 'users', component: UsersComponent, canActivate: [CanActivateService] },
+  { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent },
 ];
 
