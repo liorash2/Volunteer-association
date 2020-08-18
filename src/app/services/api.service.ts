@@ -1,9 +1,11 @@
+import { Hobby } from './../models/Hobby';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 import { promise } from 'protractor';
 import { Observable } from 'rxjs';
 import { Organization } from '../models/organization';
+import { Region } from '../models/Region';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,11 @@ export class ApiService {
   }
   updateOrganization(organization: Organization): Observable<void> {
     return this.http.put<void>(this.API_URL + 'organization/' + organization._id, organization);
+  }
+  getHobbies(): Observable<Hobby[]> {
+    return this.http.get<Hobby[]>(this.API_URL + 'hobbies');
+  }
+  getRegions(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.API_URL + 'regions');
   }
 }

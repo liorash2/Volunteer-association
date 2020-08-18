@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EditComponent } from './users/manage-organization/edit/edit.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisterVolunteerComponent } from './register-volunteer/register-volunteer.component';
+import { RegisterOrganizationComponent } from './register-organization/register-organization.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RegisterComponent } from './register/register.component';
     ManageOrganizationComponent,
     UserComponent,
     EditComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterVolunteerComponent,
+    RegisterOrganizationComponent
   ],
   imports: [
     BrowserModule,
