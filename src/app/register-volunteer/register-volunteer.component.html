@@ -1,1 +1,102 @@
-<p>register-volunteer works!</p>
+<div class="container">
+  <div class="form-holder">
+    <h1>Register New Volunteer</h1>
+    <form [formGroup]="newVolForm" (ngSubmit)="onFormSubmit()">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('firstName').touched && newVolForm.get('firstName').errors != null }">
+        <label for="n-user-f-name">First Name:</label>
+        <input id="n-user-f-name" type="text" class="form-control" formControlName="firstName">
+        <span class="help-block"
+          *ngIf="newVolForm.get('firstName').touched && newVolForm.get('firstName').errors != null">Required
+          Field</span>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('lastName').touched && newVolForm.get('lastName').errors != null }">
+        <label for="n-user-l-name">Last Name:</label>
+        <input id="n-user-l-name" type="text" class="form-control" formControlName="lastName">
+        <span class="help-block"
+          *ngIf="newVolForm.get('lastName').touched && newVolForm.get('lastName').errors != null">Required Field</span>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('email').touched && newVolForm.get('email').errors != null }">
+        <label for="n-user-email">Email:</label>
+        <input id="n-user-email" type="email" class="form-control" formControlName="email">
+        <span class="help-block"
+          *ngIf="newVolForm.get('email').touched && newVolForm.get('email').errors != null">Invalid Email
+          Address</span>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('password').touched && newVolForm.get('password').errors != null }">
+        <label for="n-user-l-name">Password</label>
+        <input id="n-user-l-name" type="password" class="form-control" formControlName="password">
+        <span class="help-block"
+          *ngIf="newVolForm.get('password').touched && newVolForm.get('password').errors != null">Invalid
+          Password</span>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('birthDay').touched && newVolForm.get('birthDay').errors != null }">
+        <label for="n-user-birthDay">Birth Day</label>
+        <input id="n-user-birthDay" type="date" class="form-control" formControlName="birthDay"  max="2004-12-31">
+        <span class="help-block"
+          *ngIf="newVolForm.get('birthDay').touched && newVolForm.get('birthDay').errors != null">Required
+          Field</span>
+      </div>
+      <div class="form-group"
+        [ngClass]="{ 'has-error': newVolForm.get('phone').touched && newVolForm.get('phone').errors != null }">
+        <label for="n-user-phone">Phone:</label>
+        <input id="n-user-phone" type="number" class="form-control" formControlName="phone">
+        <span class="help-block"
+          *ngIf="newVolForm.get('phone').touched && newVolForm.get('phone').errors != null">Invalid Phone
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-type">Type of volunteering:</label>
+            <p class="error" *ngIf="this.newVolForm.controls['hobbies'].errors?.required">
+              Hobby is required, select at least one value.
+            </p>
+            <div *ngFor="let hobby of hobbies; let i=index">
+              <label>
+                <input type="checkbox" [value]="hobby.ID" (change)="onCheckboxChange($event,'hobbies')" />
+                {{hobby.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-type">Region of volunteering:</label>
+            <p class="error" *ngIf="this.newVolForm.controls['regions'].errors?.required">
+              Region is required, select at least one value.
+            </p>
+            <div *ngFor="let region of regions; let i=index">
+              <label>
+                <input type="checkbox" [value]="region.shortCode" (change)="onCheckboxChange($event,'regions')" />
+                {{region.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>When are you available:</h2>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-startdate">Start Date</label>
+            <input id="n-user-startdate" type="date" class="form-control" formControlName="startDate" min="2020-09-01">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-enddate">End Date</label>
+            <input id="n-user-enddate" type="date" class="form-control" formControlName="endDate" min="2020-09-02">
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
