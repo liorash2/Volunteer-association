@@ -4,19 +4,15 @@
     <form [formGroup]="newOrgForm" (ngSubmit)="onFormSubmit()">
       <div class="form-group"
         [ngClass]="{ 'has-error': newOrgForm.get('orgName').touched && newOrgForm.get('orgName').errors != null }">
-        <label for="n-user-f-name">First Name:</label>
+        <label for="n-user-f-name">Organization Name:</label>
         <input id="n-user-f-name" type="text" class="form-control" formControlName="orgName">
         <span class="help-block"
           *ngIf="newOrgForm.get('orgName').touched && newOrgForm.get('orgName').errors != null">Required Field</span>
       </div>
-      <div class="form-group"
-        [ngClass]="{ 'has-error': newOrgForm.get('orgLastName').touched && newOrgForm.get('orgLastName').errors != null }">
-        <label for="n-user-l-name">Last Name:</label>
-        <input id="n-user-l-name" type="text" class="form-control" formControlName="orgLastName">
-        <span class="help-block"
-          *ngIf="newOrgForm.get('orgLastName').touched && newOrgForm.get('orgLastName').errors != null">Required
-          Field</span>
-      </div>
+      <div class="form-group">
+      <label for="n-org-desc">Organization Description:</label>
+      <textarea id="n-org-desc" type="text" class="form-control" formControlName="orgDesc"></textarea>
+    </div>
       <div class="form-group"
         [ngClass]="{ 'has-error': newOrgForm.get('orgEmail').touched && newOrgForm.get('orgEmail').errors != null }">
         <label for="n-user-email">Email:</label>
@@ -26,41 +22,66 @@
           Address</span>
       </div>
       <div class="form-group"
+        [ngClass]="{ 'has-error': newOrgForm.get('password').touched && newOrgForm.get('password').errors != null }">
+        <label for="n-user-l-name">Password</label>
+        <input id="n-user-l-name" type="password" class="form-control" formControlName="password">
+        <span class="help-block"
+          *ngIf="newOrgForm.get('password').touched && newOrgForm.get('password').errors != null">Invalid
+          Password</span>
+      </div>
+      <div class="form-group"
         [ngClass]="{ 'has-error': newOrgForm.get('orgPhone').touched && newOrgForm.get('orgPhone').errors != null }">
         <label for="n-user-phone">Phone:</label>
-        <input id="n-user-phone" type="phone" class="form-control" formControlName="orgPhone">
+        <input id="n-user-phone" type="number" class="form-control" formControlName="orgPhone">
         <span class="help-block"
           *ngIf="newOrgForm.get('orgPhone').touched && newOrgForm.get('orgPhone').errors != null">Invalid Phone
         </span>
       </div>
       <div class="form-group"
-      [ngClass]="{ 'has-error': newOrgForm.get('orgRegion').touched && newOrgForm.get('orgRegion').errors != null }">
-      <label for="n-user-region">Region of volunteering:</label>
-      <select id="n-user-region" formControlName="orgRegion" class="form-control">
+        [ngClass]="{ 'has-error': newOrgForm.get('orgRegion').touched && newOrgForm.get('orgRegion').errors != null }">
+        <label for="n-user-region">Region of volunteering:</label>
+        <select id="n-user-region" formControlName="orgRegion" class="form-control">
           <option value="">Select Region</option>
           <option *ngFor="let region of regions" [ngValue]="region.shortCode">
-              {{
+            {{
                 region.name
               }}
           </option>
-      </select>
-    </div>
+        </select>
+      </div>
       <div class="form-group"
         [ngClass]="{ 'has-error': newOrgForm.get('orgHobby').touched && newOrgForm.get('orgHobby').errors != null }">
         <label for="n-user-type">Type of volunteering:</label>
         <select id="n-user-type" formControlName="orgHobby" class="form-control">
-            <option value="">Select Volunteering Type</option>
-            <option *ngFor="let hobby of hobbies" [ngValue]="hobby.ID">
-                {{
-                    hobby.Name
+          <option value="">Select Volunteering Type</option>
+          <option *ngFor="let hobby of hobbies" [ngValue]="hobby.ID">
+            {{
+                    hobby.name
                 }}
-            </option>
+          </option>
         </select>
       </div>
       <div class="form-group"
         [ngClass]="{ 'has-error': newOrgForm.get('orgMax').touched && newOrgForm.get('orgMax').errors != null }">
         <label for="n-user-max">Max Volunteers:</label>
         <input id="n-user-max" type="number" class="form-control" formControlName="orgMax" min="1">
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Orgnization Active Between:</h2>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-startdate">Start Date</label>
+            <input id="n-user-startdate" type="date" class="form-control" formControlName="startDate" min="2020-09-01">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="n-user-enddate">End Date</label>
+            <input id="n-user-enddate" type="date" class="form-control" formControlName="endDate" min="2020-09-02">
+          </div>
+        </div>
       </div>
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>

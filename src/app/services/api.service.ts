@@ -1,3 +1,4 @@
+import { Volunteer } from './../models/volunteer';
 import { Hobby } from './../models/Hobby';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { Region } from '../models/Region';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  private readonly API_URL = 'http://localhost:3000/api/v1/';
+  private readonly API_URL = 'https://volunteer-api-node.herokuapp.com/api/v1/'//'http://localhost:3000/api/v1/';
 
   getUser(email: string): Observable<{ customer: User }> {
     return this.http.get<{ customer: User }>(this.API_URL + 'customer/' + email);
@@ -42,5 +43,15 @@ export class ApiService {
   }
   getRegions(): Observable<Region[]> {
     return this.http.get<Region[]>(this.API_URL + 'regions');
+  }
+  getVolunteers(): Observable<Volunteer[]> {
+    return this.http.get<Volunteer[]>(this.API_URL + 'volunteer');
+  }
+
+  createVolunteer(volunteer: Volunteer): Observable<{ volunteer: Volunteer }> {
+    return this.http.post<{ volunteer: Volunteer }>(this.API_URL + 'volunteer', volunteer);
+  }
+  updateVolunteer(volunteer: Volunteer): Observable<void> {
+    return this.http.put<void>(this.API_URL + 'Volunteer/' + volunteer._id, volunteer);
   }
 }
