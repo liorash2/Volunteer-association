@@ -52,6 +52,9 @@ export class ApiService {
     return this.http.post<{ volunteer: Volunteer }>(this.API_URL + 'volunteer', volunteer);
   }
   updateVolunteer(volunteer: Volunteer): Observable<void> {
-    return this.http.put<void>(this.API_URL + 'Volunteer/' + volunteer._id, volunteer);
+    return this.http.put<void>(this.API_URL + 'volunteer/' + volunteer._id, volunteer);
+  }
+  getOpenOrganization(volunteer: Volunteer): Observable<Organization[]> {
+    return this.http.get<Organization[]>(this.API_URL + 'volunteer/organizations/' + volunteer.email);
   }
 }

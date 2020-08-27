@@ -66,7 +66,7 @@ export class RegisterVolunteerComponent implements OnInit {
     vol.phone = this.newVolForm.get("phone").value;
     vol.start = this.newVolForm.get("startDate").value;
     vol.end = this.newVolForm.get("endDate").value;
-    vol.hobbies = this.newVolForm.get("hobbies").value;
+    vol.hobbies = this.newVolForm.get("hobbies").value.map(r => +r);
     vol.regions = this.newVolForm.get("regions").value;
     return vol;
   }
@@ -75,7 +75,6 @@ export class RegisterVolunteerComponent implements OnInit {
     if (!this.newVolForm.valid) {
       return;
     }
-    const b=this.buildVolReq();
     this.volunteerService.createVolunteers(this.buildVolReq()).subscribe(suc => {
       if (suc) {
         this.router.navigate(['/']);

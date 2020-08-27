@@ -75,6 +75,7 @@ export class ManageUsersComponent implements OnInit {
         this.newUserForm.value.password,
         this.newUserForm.value.role,
         this.newUserForm.value.organization,
+        null
       );
       if (this.editUserMode) {
         formUser._id = this.newUserForm.value.password;
