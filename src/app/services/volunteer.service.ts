@@ -1,3 +1,4 @@
+import { Organization } from 'src/app/models/organization';
 import { Volunteer } from './../models/volunteer';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
@@ -20,6 +21,9 @@ export class VolunteerService {
   }
   createVolunteers(volunteer: Volunteer): Observable<Volunteer> {
     return this.apiService.createVolunteer(volunteer).pipe(map(o => o.volunteer));
+  }
+  getAvailableOrganization(volunteer: Volunteer): Observable<Organization[]> {
+    return this.apiService.getOpenOrganization(volunteer);
   }
 
   updateVolunteer(volunteer: Volunteer): Observable<boolean> {
