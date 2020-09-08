@@ -1,8 +1,8 @@
-import { Organization } from 'src/app/models/organization';
+import { Organization } from './../models/organization';
 import { Volunteer } from './../models/volunteer';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -24,6 +24,9 @@ export class VolunteerService {
   }
   getAvailableOrganization(volunteer: Volunteer): Observable<Organization[]> {
     return this.apiService.getOpenOrganization(volunteer);
+  }
+  registerToOrganization(volunteer: Volunteer, org: string): Observable<boolean> {
+    return this.apiService.registerVolunteerToOrganization(volunteer, org);
   }
 
   updateVolunteer(volunteer: Volunteer): Observable<boolean> {

@@ -1,3 +1,4 @@
+import { Organization } from './../models/organization';
 import { Volunteer } from './../models/volunteer';
 import { Hobby } from './../models/Hobby';
 import { Injectable } from '@angular/core';
@@ -5,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 import { promise } from 'protractor';
 import { Observable } from 'rxjs';
-import { Organization } from '../models/organization';
 import { Region } from '../models/Region';
 
 @Injectable({
@@ -56,5 +56,8 @@ export class ApiService {
   }
   getOpenOrganization(volunteer: Volunteer): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.API_URL + 'volunteer/organizations/' + volunteer.email);
+  }
+  registerVolunteerToOrganization(volunteer: Volunteer, orgid: string): Observable<boolean> {
+    return this.http.put<boolean>(this.API_URL + 'volunteer/register/' + volunteer.email + '/' + orgid, null);
   }
 }
