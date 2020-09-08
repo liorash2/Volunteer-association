@@ -24,3 +24,6 @@
     text-decoration: none;
     font-weight: bold;
 }
+.panel-body .org-desc{
+  min-height: 90px;
+}

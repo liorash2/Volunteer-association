@@ -26,13 +26,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.userSub.unsubscribe();
   }
   hasPermission(url: string): boolean {
-    if (this.user) {
-      return this.usersService.hasPermission(url);
-    }
+    // if (this.user) {
+    //   return this.usersService.hasPermission(url);
+    // }
     return false;
+
   }
 
-  logout(){
+  logout() {
     this.usersService.logoutUser();
     this.route.navigate(['/']);
   }
