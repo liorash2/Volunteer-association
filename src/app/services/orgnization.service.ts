@@ -1,7 +1,8 @@
+import { Volunteer } from './../models/volunteer';
+import { Organization } from 'src/app/models/organization';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { Organization } from '../models/organization';
 import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -17,6 +18,9 @@ export class OrgnizationService {
 
   getOrganizations(): Observable<Organization[]> {
     return this.apiService.getOrganizations();
+  }
+  getAvailableVolunteers(org: Organization): Observable<Volunteer[]> {
+    return this.apiService.getFreeVolunteers(org);
   }
   createOrganization(organization: Organization): Observable<Organization> {
     return this.apiService.createOrganization(organization).pipe(map(o => o.organization));

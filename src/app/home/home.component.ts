@@ -1,3 +1,4 @@
+import { OrgnizationService } from 'src/app/services/orgnization.service';
 import { Volunteer } from './../models/volunteer';
 import { Organization } from './../models/organization';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -19,24 +20,31 @@ export class HomeComponent implements OnInit, OnDestroy {
   organizations: Organization[];
   volunteers: Volunteer[];
   registerSuccessMsg: boolean;
-  constructor(private userService: UsersService, private volunteerService: VolunteerService) { }
+  constructor(private userService: UsersService, private volunteerService: VolunteerService, private organizationserivce: OrgnizationService) { }
 
   ngOnInit(): void {
     this.userSub = this.userService.user.subscribe(user => {
       this.user = user;
-      this.getAvailOrganizations();
+      this.getAvailOrganizationsorVolunteers();
     });
   }
-  getAvailOrganizations() {
-    if(this.user)
-    {
+  getAvailOrganizationsorVolunteers() {
+    if (this.user) {
       if (this.user.role === "volunteer") {
         let volun = this.user.obj as Volunteer;
         if (volun) {
           this.volunteerService.getAvailableOrganization(volun).subscribe(org => {
-            ;
             this.organizations = org;
             console.log(this.organizations)
+          });
+        }
+      }
+      else {
+        let org = this.user.obj as Organization;
+        if (org) {
+          this.organizationserivce.getAvailableVolunteers(org).subscribe(volun => {
+            this.volunteers = volun;
+            console.log(this.volunteers)
           });
         }
       }
@@ -59,4 +67,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
     }
   }
+  addVolunToOrg(volunid: string) {
+    if (this.user && volunid) {
+      let org = this.user.obj as Organization;
+      let volun = this.volunteers.find(r => r._id == volunid);
+      this.volunteerService.registerToOrganization(volun, org._id).subscribe(suc => {
+        if (suc) {
+          this.registerSuccessMsg = true;
+        }
+
+      }, err => {
+        alert(err.error.error);
+      })
+    }
+  }
+
 }
