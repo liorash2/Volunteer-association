@@ -24,9 +24,29 @@
       <div class="panel panel-default">
         <div class="panel-heading">{{org.name}}</div>
         <div class="panel-body">
-          <div class="org-desc">  {{org.desc}}</div> 
+          <div class="org-desc"> {{org.desc}}</div>
           <br>
           <button class="btn btn-primary" (click)="applyToOrg(org._id)">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="user && volunteers && !registerSuccessMsg">
+  <h2>Found {{volunteers.length}} available for your organization:</h2>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let volun of volunteers">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{volun.firstName + " " + volun.lastName}}</div>
+        <div class="panel-body">
+          <div class="org-desc">email: {{volun.email}}
+            <br>
+            phone: {{volun.phone}}
+          </div>
+          <br>
+          <button class="btn btn-primary" (click)="addVolunToOrg(volun._id)">Add Volun</button>
         </div>
       </div>
     </div>

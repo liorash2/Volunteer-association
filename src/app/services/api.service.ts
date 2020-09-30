@@ -1,4 +1,4 @@
-import { Organization } from './../models/organization';
+import { Organization } from 'src/app/models/organization';
 import { Volunteer } from './../models/volunteer';
 import { Hobby } from './../models/Hobby';
 import { Injectable } from '@angular/core';
@@ -57,7 +57,12 @@ export class ApiService {
   getOpenOrganization(volunteer: Volunteer): Observable<Organization[]> {
     return this.http.get<Organization[]>(this.API_URL + 'volunteer/organizations/' + volunteer.email);
   }
+  getFreeVolunteers(org: Organization): Observable<Volunteer[]> {
+    return this.getVolunteers();
+   // return this.http.get<Volunteer[]>(this.API_URL + 'organizations/volunteer/' + org._id);
+  }
   registerVolunteerToOrganization(volunteer: Volunteer, orgid: string): Observable<boolean> {
     return this.http.put<boolean>(this.API_URL + 'volunteer/register/' + volunteer.email + '/' + orgid, null);
   }
+  
 }
